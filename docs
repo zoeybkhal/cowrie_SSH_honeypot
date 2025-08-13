@@ -1,1 +1,17 @@
 
+![alt text](image.png)
+# Cowrie pretending to be a real Linux server (hence the Debian welcome message).
+# Cowrie logs whatever password is inputted, however it is not validated
+
+![alt text](image-1.png)
+# Example of a JSON log entry
+# In this example, as the 'attacker', I inputted the password 'Beepbeepboop' when prompted by Cowrie. This is logged in real time in the cowrie.json file.
+# The following command is used for formatting the JSON file:
+# sudo tail -f /home/cowrie/cowrie/var/log//cowrie/cowrie.json | jq
+
+
+![alt text](image-3.png)
+# As the 'attacker' I ran some common commands that a real attacker may use to investigate the system.
+
+![alt text](image-2.png)
+# These commands were also logged in the cowrie.log file.
