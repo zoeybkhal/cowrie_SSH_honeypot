@@ -12,3 +12,52 @@ Smaller attack surface → less software for attackers to exploit.
   ```bash
   # Install Ubuntu Server (no GUI)
   sudo apt update && sudo apt upgrade -y
+
+## **Port Reconfiguration**
+**Problem**: Cowrie defaults to port 2222, but attackers target port 22 (standard SSH).
+
+**Solution**:
+```bash
+    # Change real SSH to port 2200
+    sudo nano /etc/ssh/sshd_config  # Edit 'Port 2200'
+    sudo systemctl restart ssh
+
+    # Redirect port 22 to Cowrie (2222)
+    sudo iptables -t nat -A PREROUTING -p tcp --dport 22 -j REDIRECT --to-port 2222
+```
+In the process of reconfiguring Cowrie to port 22 (for making attacks more likely) I learnt about port conflicts and firewall rules.
+
+## **Connecting from Windows PowerShell**
+**VirtualBox Port Forwarding:**
+Host: 127.0.0.1:2222 → Guest: 2222
+
+**Test Connection:**
+```bash
+ssh root@127.0.0.1 -p 2222  # Triggers Cowrie's fake shell
+```
+
+## **Keeping Cowrie Running**
+**To ensure Cowrie survives reboots, I created a systemd service:**
+```bash
+sudo nano /etc/systemd/system/cowrie.service
+```
+**Paste the following:**
+```bash
+[Unit]
+Description=Cowrie SSH Honeypot
+After=network.target
+
+[Service]
+User=cowrie
+WorkingDirectory=/home/cowrie/cowrie
+ExecStart=/home/cowrie/cowrie/bin/cowrie start
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+**Then enable it:**:
+```bash
+sudo systemctl enable cowrie && sudo systemctl start cowrie
+```
+
