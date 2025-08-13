@@ -68,4 +68,4 @@ sudo systemctl enable cowrie && sudo systemctl start cowrie
 - Feel free to check out the 'docs' file for screenshots with side-by-side explanations! 
 - If you have also experimented with honeypots, I would love to hear about your experience and tips!
 
-My linkedin: [text](https://www.linkedin.com/in/zoey-bou-khalil-a422a4272/)
+✉️ Contact me via LinkedIn! (https://www.linkedin.com/in/zoey-bou-khalil-a422a4272/)
