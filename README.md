@@ -6,7 +6,9 @@
 
 ## **Setup & Configuration**  
 ### **1. Why choose Ubuntu Server Over Desktop?**  
-- **Reasoning**: Lower resource usage → more room for the actual honeypot tools.
+- **Reasoning**: 
+Lower resource usage → more room for the actual honeypot tools.
+
 Smaller attack surface → less software for attackers to exploit.
 - **Key Steps**:  
   ```bash
@@ -56,7 +58,7 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 ```
-**Then enable it:**:
+**Then enable it**:
 ```bash
 sudo systemctl enable cowrie && sudo systemctl start cowrie
 ```
