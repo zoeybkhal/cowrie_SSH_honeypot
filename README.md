@@ -17,7 +17,8 @@ Smaller attack surface → less software for attackers to exploit.
   sudo apt update && sudo apt upgrade -y
 
 ## **Port Reconfiguration**
-**Problem**: Cowrie defaults to port 2222, but attackers target port 22 (standard SSH).
+**Problem**: Cowrie defaults to port 2222, but attackers target port 22 (standard SSH). I learnt that in order for attackers to hit the honeypot, all traffic on port 22 must be intercepted and redirected to port 2222, where Cowrie is actively running and pretending to be a real SSH server.
+Since our real SSH runs on port 22 by default, we must move this to a different port that attackers will not scan, for safety purposes.
 
 **Solution**:
 ```bash
@@ -28,7 +29,7 @@ Smaller attack surface → less software for attackers to exploit.
     # Redirect port 22 to Cowrie (2222)
     sudo iptables -t nat -A PREROUTING -p tcp --dport 22 -j REDIRECT --to-port 2222
 ```
-In the process of reconfiguring Cowrie to port 22 (for making attacks more likely) I learnt about port conflicts and firewall rules.
+In the process of reconfiguring Cowrie to port 22 (for making attacks more likely) I learnt about port conflicts and firewall rules, that I was previously unaware of.
 
 ## **Connecting from Windows PowerShell**
 **VirtualBox Port Forwarding:**
